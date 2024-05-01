@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public Transform gunTip;             // The transform representing the tip of the gun barrel
-    public GameObject bulletPrefab;      // Prefab of the bullet
-    public float bulletSpeed = 30f;      // Speed of the bullet when fired
-    public float recoilForce = 200f;     // Recoil force applied to the gun
-    public float maxDistance = 100f;     // Maximum distance for the raycast
+    public Transform gunTip;             
+    public GameObject bulletPrefab;      
+    public float bulletSpeed = 30f;      
+    public float recoilForce = 200f;     
+    public float maxDistance = 100f;     
 
-    private AudioSource gunAudioSource;  // Audio source for gun sound
+    private AudioSource gunAudioSource;
+    public AudioClip gunClip;
 
     void Start()
     {
@@ -17,9 +18,9 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))   // Check if the Fire1 button (left mouse click) is pressed
+        if (Input.GetButtonDown("Fire1"))   
         {
-            Shoot();  // Call the Shoot method
+            Shoot();  
         }
     }
 
@@ -66,8 +67,6 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            // If raycast doesn't hit anything, handle default shooting behavior (without hit point instantiation)
-            // Instantiate a new bullet at the gunTip position and rotation
             GameObject bullet = Instantiate(bulletPrefab, gunTip.forward*maxDistance, gunTip.rotation);
 
             // Get the rigidbody component of the bullet
@@ -82,7 +81,7 @@ public class Gun : MonoBehaviour
             // Play gun shoot sound if audio source is assigned
             if (gunAudioSource != null)
             {
-                gunAudioSource.Play();
+                gunAudioSource.PlayOneShot(gunClip, 1f);
             }
 
             // Apply recoil force to the gun at the gunTip position in the opposite direction
