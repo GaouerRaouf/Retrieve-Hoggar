@@ -57,19 +57,4 @@ public class FieldOfView : MonoBehaviour
         
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Handles.color = Color.green;
-
-        Handles.DrawWireArc(transform.position, transform.up, transform.forward, _viewAngle, _viewRadius);
-        Handles.DrawWireArc(transform.position, transform.up, transform.forward, -_viewAngle, _viewRadius);
-
-        Vector3 lineA = Quaternion.AngleAxis(_viewAngle, transform.up) * transform.forward;
-        Vector3 lineB = Quaternion.AngleAxis(-_viewAngle, transform.up) * transform.forward;
-        Handles.DrawLine(transform.position, transform.position + (lineA * _viewRadius));
-        Handles.DrawLine(transform.position, transform.position + (lineB * _viewRadius));
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _viewRadius);
-    }
 }
