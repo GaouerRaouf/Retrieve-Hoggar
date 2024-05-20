@@ -31,9 +31,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckWin()
     {
-
-        // Check if there are no enemies left
-        if (Enemies.childCount == 0)
+        if (Enemies.childCount <= 1)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

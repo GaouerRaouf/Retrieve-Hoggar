@@ -5,11 +5,12 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
 
-    private Collider collider;
+
+    public bool isAttacking = false;
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<Collider>();
+
     }
 
     // Update is called once per frame
@@ -25,10 +26,10 @@ public class Sword : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Health health = other.gameObject.GetComponent<Health>();
-        if (health != null && health.gameObject.CompareTag("Player"))
+        if (isAttacking && health != null && health.gameObject.CompareTag("Player"))
         {
-            health.TakeDamage(3f);
+            health.TakeDamage(10f);
+            isAttacking = false;
         }
-        collider.isTrigger = false;
     }
 }

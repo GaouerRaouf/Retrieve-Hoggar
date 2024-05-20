@@ -14,7 +14,7 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private float _viewAngle = 30f;
     [SerializeField] private LayerMask _blockingLayers;
     private EnemyController enemy;
-
+    public Collider targ;
     void Start()
     {
         enemy = GetComponent<EnemyController>();
@@ -47,8 +47,8 @@ public class FieldOfView : MonoBehaviour
                     }
 
                     visibleObjects.Add(target.transform);
-                   
-                    enemy.StartAttack(target);
+                    enemy.StartAttack();
+                    enemy.StartChasing(target);
 
                 }
             }
